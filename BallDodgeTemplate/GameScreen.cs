@@ -53,6 +53,23 @@ namespace BallDodgeTemplate
         private void engine_Tick(object sender, EventArgs e)
         {
 
+            if (leftArrowDown)
+            {
+                hero.x -= hero.speed;
+            }
+            if (rightArrowDown)
+            {
+                hero.x += hero.speed;
+            }
+            if (upArrowDown)
+            {
+                hero.y -= hero.speed;
+            }
+            if (downArrowDown)
+            {
+                hero.y += hero.speed;
+            }
+
             chaseBall.Move(this.Width, this.Height);
 
 
