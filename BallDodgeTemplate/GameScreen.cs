@@ -16,7 +16,10 @@ namespace BallDodgeTemplate
         
         SolidBrush greenBrush = new SolidBrush(Color.Green);
         SolidBrush redBrush = new SolidBrush(Color.Red);
+        SolidBrush whiteBrush = new SolidBrush(Color.White);
         Ball chaseBall = new Ball(40, 100, 10, 10);
+        Player hero;
+        Boolean leftArrowDown, rightArrowDown, upArrowDown, downArrowDown;
         List<Ball> balls = new List<Ball>();
         Random randgen = new Random();  
 
@@ -29,6 +32,8 @@ namespace BallDodgeTemplate
 
         public void InitializeGame()
         {
+
+            hero = new Player(50, 100);
             //putting variables in here instead of at the top makes them easier to reset
             int x = randgen.Next(10, this.Width - 30);
             int y = randgen.Next(10, this.Height - 30);
@@ -62,6 +67,7 @@ namespace BallDodgeTemplate
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.FillRectangle(whiteBrush, hero.x, hero.y, hero.width, hero.height);
             e.Graphics.FillEllipse(greenBrush, chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
             foreach (Ball b in balls)
             {
@@ -72,12 +78,40 @@ namespace BallDodgeTemplate
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-
+            switch(e.KeyCode)
+            {
+                case Keys.Left:
+                    leftArrowDown = true;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = true;
+                    break;
+                case Keys.Up:
+                    upArrowDown = true;
+                    break;
+                case Keys.Down:
+                    downArrowDown = true;
+                    break;
+            }
         }
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
-
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    leftArrowDown = false;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = false;
+                    break;
+                case Keys.Up:
+                    upArrowDown = false;
+                    break;
+                case Keys.Down:
+                    downArrowDown = false;
+                    break;
+            }
         }
     }
 }
