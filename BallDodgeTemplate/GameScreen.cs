@@ -13,30 +13,48 @@ namespace BallDodgeTemplate
     public partial class GameScreen : UserControl
     {
 
-        Ball chaseBall = new Ball(40, 100, 10,10);
+        
         SolidBrush greenBrush = new SolidBrush(Color.Green);
+        SolidBrush redBrush = new SolidBrush(Color.Red);
+        Ball chaseBall = new Ball(40, 100, 10, 10);
+        List<Ball> balls = new List<Ball>();
+        Random randgen = new Random();  
+
 
         public GameScreen()
         {
             InitializeComponent();
+            InitializeGame();
+        }
+
+        public void InitializeGame()
+        {
+            //putting variables in here instead of at the top makes them easier to reset
+            int x = randgen.Next(10, this.Width - 30);
+            int y = randgen.Next(10, this.Height - 30);
+            Ball chaseBall = new Ball(40, 100, 10, 10);
+            
+            for (int i = 0; i < 4; i++)
+            {
+                x = randgen.Next(10, this.Width - 30);
+                y = randgen.Next(10, this.Height - 30);
+                Ball newBall = new Ball(x, y, 10, 10);
+                balls.Add(newBall);
+            }
+
+
         }
 
         private void engine_Tick(object sender, EventArgs e)
         {
 
-            /*chaseBall.x += chaseBall.xSpeed;
-            chaseBall.y += chaseBall.ySpeed;*/
-
             chaseBall.Move(this.Width, this.Height);
 
-            /*if(chaseBall.x > this.Width - chaseBall.size || chaseBall.x < 0)
+
+            foreach (Ball b in balls)
             {
-                chaseBall.xSpeed *= -1;
+                b.Move(this.Width, this.Height);
             }
-            if (chaseBall.y > this.Height - chaseBall.size || chaseBall.y < 0)
-            {
-                chaseBall.ySpeed *= -1;
-            }*/
 
 
             Refresh();
@@ -45,7 +63,12 @@ namespace BallDodgeTemplate
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillEllipse(greenBrush, chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
+            foreach (Ball b in balls)
+            {
+                e.Graphics.FillEllipse(redBrush, b.x, b.y, b.size, b.size);
+            }
         }
+
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
