@@ -20,5 +20,25 @@ namespace BallDodgeTemplate
             this.y = _y;
         }
 
+        public void Move(string direction)
+        {
+            if(direction == "left")
+            {
+                x -= speed;
+            }
+            if (direction == "right")
+            {
+                x += speed;
+            }
+            if (direction == "up")
+            {
+                y -= speed;
+            }
+            if (direction == "down")
+            {
+                y += speed;
+            }
+        }
+
     }
 }
