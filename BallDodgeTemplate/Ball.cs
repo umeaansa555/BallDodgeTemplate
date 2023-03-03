@@ -21,8 +21,7 @@ namespace BallDodgeTemplate
 
         public void Move( int screenWidth, int screenHeight)
         {
-            xSpeed = 10;
-            ySpeed = 10;
+            
             x += xSpeed;
             y += ySpeed;
 
