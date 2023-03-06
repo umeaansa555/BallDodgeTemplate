@@ -34,5 +34,16 @@ namespace BallDodgeTemplate
                 ySpeed *= -1;
             }
         }
+        public void Collision(Ball b)
+        {
+            Rectangle ballRec = new Rectangle(x, y, size, size);
+            Rectangle ball2Rec = new Rectangle(b.x, b.y, b.size, b.size);
+
+            if (ballRec.IntersectsWith(ball2Rec))
+            {
+                ySpeed *= -1;
+            }
+        }
+
     }
 }
