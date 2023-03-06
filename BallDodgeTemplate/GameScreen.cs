@@ -12,7 +12,7 @@ namespace BallDodgeTemplate
 {
     public partial class GameScreen : UserControl
     {
-        int score = 0;
+        public static int score = 0;
         public static int lives = 5;
         public static int difficulty;
 
@@ -87,6 +87,7 @@ namespace BallDodgeTemplate
             if (chaseBall.Collision(hero))
             {
                 lives++;
+                score++;
             }
 
             foreach (Ball b in balls)
@@ -102,6 +103,7 @@ namespace BallDodgeTemplate
             if (lives == 0)
             {
                 engine.Stop();
+                Form1.ChangeScreen(this, new GameOverScreen());
             }
             
 
