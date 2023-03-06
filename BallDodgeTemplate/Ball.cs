@@ -45,7 +45,7 @@ namespace BallDodgeTemplate
                 ySpeed *= -1;
             }
         }
-        public void Collision(Player p)
+        public bool Collision(Player p)
         {
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle playerRec = new Rectangle(p.x, p.y, p.width, p.height);
@@ -63,7 +63,10 @@ namespace BallDodgeTemplate
                 }
 
                 ySpeed *= -1;
+                return true;
             }
+            return false;
+
         }
     }
 }
