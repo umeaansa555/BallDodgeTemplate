@@ -39,7 +39,7 @@ namespace BallDodgeTemplate
             int y = randgen.Next(10, this.Height - 30);
             Ball chaseBall = new Ball(40, 100, 10, 10);
             
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 10; i++)
             {
                 x = randgen.Next(10, this.Width - 30);
                 y = randgen.Next(10, this.Height - 30);
@@ -79,6 +79,12 @@ namespace BallDodgeTemplate
                 b.Move(this.Width, this.Height);
             }
 
+            foreach (Ball b in balls)
+            {
+                b.Collision(hero);
+            }
+
+            
 
             Refresh();
         }
